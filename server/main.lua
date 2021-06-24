@@ -110,7 +110,7 @@ AddEventHandler('qb-vehicleshop:server:SetCustomShowroomVeh', function(vData, k)
     TriggerClientEvent('qb-vehicleshop:client:SetCustomShowroomVeh', -1, vData, k)
 end)
 
-QBCore.Commands.Add("verkoop", "Verkoop voertuig uit Custom Cardealer", {}, false, function(source, args)
+QBCore.Commands.Add("sell", "Sell Vehicle (Car Dealer Only)", {}, false, function(source, args)
     local Player = QBCore.Functions.GetPlayer(source)
     local TargetId = args[1]
 
@@ -125,7 +125,7 @@ QBCore.Commands.Add("verkoop", "Verkoop voertuig uit Custom Cardealer", {}, fals
     end
 end)
 
-QBCore.Commands.Add("testrit", "Testrit maken", {}, false, function(source, args)
+QBCore.Commands.Add("testdrive", "Test Drive Vehicle (Car Dealer Only)", {}, false, function(source, args)
     local Player = QBCore.Functions.GetPlayer(source)
     local TargetId = args[1]
 

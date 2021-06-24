@@ -198,8 +198,8 @@ Citizen.CreateThread(function()
             if dist < 2 then
                 if PlayerJob ~= nil then
                     if PlayerJob.name == 'cardealer' then
-                        DrawText3Ds(QBCustom.ShowroomPositions[ClosestCustomVehicle].coords.x, QBCustom.ShowroomPositions[ClosestCustomVehicle].coords.y, QBCustom.ShowroomPositions[ClosestCustomVehicle].coords.z + 1.9, '~g~G~w~ - Voertuig veranderen')
-                        DrawText3Ds(QBCustom.ShowroomPositions[ClosestCustomVehicle].coords.x, QBCustom.ShowroomPositions[ClosestCustomVehicle].coords.y, QBCustom.ShowroomPositions[ClosestCustomVehicle].coords.z + 1.75, '~b~/verkoop [id]~w~ - Voertuig verkopen ~b~/testrit~w~ - Testrit maken')
+                        DrawText3Ds(QBCustom.ShowroomPositions[ClosestCustomVehicle].coords.x, QBCustom.ShowroomPositions[ClosestCustomVehicle].coords.y, QBCustom.ShowroomPositions[ClosestCustomVehicle].coords.z + 1.9, '~g~G~w~ - Change Vehicle')
+                        DrawText3Ds(QBCustom.ShowroomPositions[ClosestCustomVehicle].coords.x, QBCustom.ShowroomPositions[ClosestCustomVehicle].coords.y, QBCustom.ShowroomPositions[ClosestCustomVehicle].coords.z + 1.75, '~b~/sell [id]~w~ - Sell Vehicle ~b~/testdrive~w~ - Test Drive')
                         
                         if not CustomVehicleShop.opened then
                             if IsControlJustPressed(0, 47) then
