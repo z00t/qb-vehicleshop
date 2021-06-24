@@ -325,7 +325,7 @@ end
 Citizen.CreateThread(function()
     while true do
         local pos = GetEntityCoords(PlayerPedId(), true)
-        local shopDist = #(pos - vector3(QB.VehicleShops[1].x, QB.VehicleShops[1].y, QB.VehicleShops[1].z))
+        local shopDist = #(pos - QB.VehicleShop)
         if isLoggedIn then
             if shopDist <= 50 then
                 setClosestShowroomVehicle()
