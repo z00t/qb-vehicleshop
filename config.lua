@@ -102,22 +102,22 @@ QB.ShowroomVehicles = {
 
 QBCustom.ShowroomPositions = {
     [1] = {
-        coords = vector4(-792.46, -233.15, 36.05, 80.0),
-        vehicle = 'adder',
+        coords = vector4(-75.96, 74.78, 71.27, 221.69),
+        vehicle = 'italirsx',
         buying = false,
     }, 
     [2] = {
-        coords = vector4(-789.57, -237.95, 36.05, 83.5),
-        vehicle = 'sultan',
+        coords = vector4(-66.52, 74.33, 71.0, 188.03),
+        vehicle = 'italigtb',
         buying = false,
     }, 
     [3] = {
-        coords = vector4(-786.98, -242.74, 36.05, 74.5),
+        coords = vector4(-71.83, 68.60, 71.12, 276.57),
         vehicle = 'nero',
         buying = false,
     }, 
     [4] = {
-        coords = vector4(-783.27, -223.07, 36.36, 138.5),
+        coords = vector4(-59.95, 68.61, 71.24, 181.44),
         vehicle = 'comet2',
         buying = false,
     },
