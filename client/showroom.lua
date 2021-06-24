@@ -26,7 +26,7 @@ vehshop = {
 			title = "CATEGORIES",
 			name = "main",
 			buttons = {
-				{name = "Voertuigen", description = ""},
+				{name = "Categories", description = ""},
 			}
 		},
 		["vehicles"] = {
@@ -148,7 +148,7 @@ function ButtonSelected(button)
     local btn = button.name
     
 	if this == "main" then
-		if btn == "Voertuigen" then
+		if btn == "Categories" then
 			OpenMenu('vehicles')
 		end
 	elseif this == "vehicles" then
