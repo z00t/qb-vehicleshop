@@ -126,17 +126,13 @@ AddEventHandler('qb-vehicleshop:client:spawnBoughtVehicle', function(vehicle)
 end)
 
 Citizen.CreateThread(function()
-    for k, v in pairs(QB.VehicleShops) do
-        Dealer = AddBlipForCoord(QB.VehicleShops[k].x, QB.VehicleShops[k].y, QB.VehicleShops[k].z)
-
-        SetBlipSprite (Dealer, 326)
-        SetBlipDisplay(Dealer, 4)
-        SetBlipScale  (Dealer, 0.75)
-        SetBlipAsShortRange(Dealer, true)
-        SetBlipColour(Dealer, 3)
-
-        BeginTextCommandSetBlipName("STRING")
-        AddTextComponentSubstringPlayerName("Premium Deluxe Motorsports")
-        EndTextCommandSetBlipName(Dealer)
-    end
+    Dealer = AddBlipForCoord(QB.VehicleShop)
+    SetBlipSprite (Dealer, 326)
+    SetBlipDisplay(Dealer, 4)
+    SetBlipScale  (Dealer, 0.75)
+    SetBlipAsShortRange(Dealer, true)
+    SetBlipColour(Dealer, 3)
+    BeginTextCommandSetBlipName("STRING")
+    AddTextComponentSubstringPlayerName("Premium Deluxe Motorsports")
+    EndTextCommandSetBlipName(Dealer)
 end)

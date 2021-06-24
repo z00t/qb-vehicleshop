@@ -4,19 +4,15 @@ local CustomModelLoaded = true
 local testritveh = 0
 
 Citizen.CreateThread(function()
-    for k, v in pairs(QB.VehicleShops) do
-        Dealer = AddBlipForCoord(-795.91, -220.21, 37.07)
-
-        SetBlipSprite (Dealer, 326)
-        SetBlipDisplay(Dealer, 4)
-        SetBlipScale  (Dealer, 0.75)
-        SetBlipAsShortRange(Dealer, true)
-        SetBlipColour(Dealer, 3)
-
-        BeginTextCommandSetBlipName('STRING')
-        AddTextComponentSubstringPlayerName('Luxury Cars')
-        EndTextCommandSetBlipName(Dealer)
-    end
+    Dealer = AddBlipForCoord(QB.LuxuryShop)
+    SetBlipSprite (Dealer, 326)
+    SetBlipDisplay(Dealer, 4)
+    SetBlipScale  (Dealer, 0.75)
+    SetBlipAsShortRange(Dealer, true)
+    SetBlipColour(Dealer, 3)
+    BeginTextCommandSetBlipName('STRING')
+    AddTextComponentSubstringPlayerName('Luxury Cars')
+    EndTextCommandSetBlipName(Dealer)
 end)
 
 Citizen.CreateThread(function()
@@ -34,7 +30,7 @@ Citizen.CreateThread(function()
 
                 if dist < 2 then
                     if veh == testritveh then
-                        DrawText3Ds(bringcoords.x, bringcoords.y, bringcoords.z, '~g~E~w~ - Voertuig inleveren')
+                        DrawText3Ds(bringcoords.x, bringcoords.y, bringcoords.z, '~g~E~w~ - Return Vehicle')
                         if IsControlJustPressed(0, 38) then
                             testritveh = 0
                             QBCore.Functions.DeleteVehicle(veh)
