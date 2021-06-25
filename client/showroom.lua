@@ -343,7 +343,7 @@ Citizen.CreateThread(function()
         local pos = GetEntityCoords(ped)
         local dist = #(pos - vector3(QB.ShowroomVehicles[ClosestVehicle].coords.x, QB.ShowroomVehicles[ClosestVehicle].coords.y, QB.ShowroomVehicles[ClosestVehicle].coords.z))
         if ClosestVehicle ~= nil then
-            if dist < 1.5 then
+            if dist < 2.5 then
                 if not QB.ShowroomVehicles[ClosestVehicle].inUse then
                     local vehicleHash = GetHashKey(QB.ShowroomVehicles[ClosestVehicle].chosenVehicle)
                     local displayName = QBCore.Shared.Vehicles[QB.ShowroomVehicles[ClosestVehicle].chosenVehicle]["name"]
