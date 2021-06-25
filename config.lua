@@ -7,7 +7,7 @@ QB.DefaultBuySpawn = vector4(-56.79, -1109.85, 26.43, 71.5)
 QBCustom.VehicleBuyLocation = vector4(-67.33, 82.17, 71.13, 64.51)
 
 QB.VehicleShop = vector3(-56.71, -1096.6, 25.44)
-QB.LuxuryShop = vector3(-795.91, -220.21, 37.07)
+QB.LuxuryShop = vector3(-63.59, 68.25, 73.06)
 
 QB.GarageLabel = {
     ['motelgarage'] = 'Motel Garage',
