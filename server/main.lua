@@ -22,7 +22,15 @@ AddEventHandler('qb-vehicleshop:server:buyVehicle', function(vehicleData, garage
     
     if (balance - vData["price"]) >= 0 then
         local plate = GeneratePlate()
-        QBCore.Functions.ExecuteSql(false, "INSERT INTO `player_vehicles` (`steam`, `citizenid`, `vehicle`, `hash`, `mods`, `plate`, `garage`) VALUES ('"..pData.PlayerData.steam.."', '"..cid.."', '"..vData["model"].."', '"..GetHashKey(vData["model"]).."', '{}', '"..plate.."', '"..garage.."')")
+        exports.ghmattimysql:execute('INSERT INTO player_vehicles (steam, citizenid, vehicle, hash, mods, plate, garage) VALUES (@steam, @citizenid, @vehicle, @hash, @mods, @plate, @garage)', {
+            ['@steam'] = pData.PlayerData.steam,
+            ['@citizenid'] = cid,
+            ['@vehicle'] = vData["model"],
+            ['@hash'] = GetHashKey(vData["model"]),
+            ['@mods'] = '{}',
+            ['@plate'] = plate,
+            ['@garage'] = garage
+        })
         TriggerClientEvent("QBCore:Notify", src, "Success! Your vehicle has been delivered to "..QB.GarageLabel[garage], "success", 5000)
         pData.Functions.RemoveMoney('bank', vData["price"], "vehicle-bought-in-shop")
         TriggerEvent("qb-log:server:sendLog", cid, "vehiclebought", {model=vData["model"], name=vData["name"], from="garage", location=QB.GarageLabel[garage], moneyType="bank", price=vData["price"], plate=plate})
@@ -42,7 +50,15 @@ AddEventHandler('qb-vehicleshop:server:buyShowroomVehicle', function(vehicle, cl
     local plate = GeneratePlate()
 
     if (balance - vehiclePrice) >= 0 then
-        QBCore.Functions.ExecuteSql(false, "INSERT INTO `player_vehicles` (`steam`, `citizenid`, `vehicle`, `hash`, `mods`, `plate`, `state`) VALUES ('"..pData.PlayerData.steam.."', '"..cid.."', '"..vehicle.."', '"..GetHashKey(vehicle).."', '{}', '"..plate.."', 0)")
+        exports.ghmattimysql:execute('INSERT INTO player_vehicles (steam, citizenid, vehicle, hash, mods, plate, state) VALUES (@steam, @citizenid, @vehicle, @hash, @mods, @plate, @state)', {
+            ['@steam'] = pData.PlayerData.steam,
+            ['@citizenid'] = cid,
+            ['@vehicle'] = vehicle,
+            ['@hash'] = GetHashKey(vehicle),
+            ['@mods'] = '{}',
+            ['@plate'] = plate,
+            ['@state'] = 0
+        })
         TriggerClientEvent("QBCore:Notify", src, "Success! Your vehicle will be waiting for you outside", "success", 5000)
         TriggerClientEvent('qb-vehicleshop:client:buyShowroomVehicle', src, vehicle, plate)
         pData.Functions.RemoveMoney('bank', vehiclePrice, "vehicle-bought-in-showroom")
@@ -151,11 +167,27 @@ AddEventHandler('qb-vehicleshop:server:ConfirmVehicle', function(ShowroomVehicle
     if Player.PlayerData.money.cash >= VehPrice then
         Player.Functions.RemoveMoney('cash', VehPrice)
         TriggerClientEvent('qb-vehicleshop:client:ConfirmVehicle', src, ShowroomVehicle, plate)
-        QBCore.Functions.ExecuteSql(false, "INSERT INTO `player_vehicles` (`steam`, `citizenid`, `vehicle`, `hash`, `mods`, `plate`, `state`) VALUES ('"..Player.PlayerData.steam.."', '"..Player.PlayerData.citizenid.."', '"..ShowroomVehicle.vehicle.."', '"..GetHashKey(ShowroomVehicle.vehicle).."', '{}', '"..plate.."', 0)")
+        exports.ghmattimysql:execute('INSERT INTO player_vehicles (steam, citizenid, vehicle, hash, mods, plate, state) VALUES (@steam, @citizenid, @vehicle, @hash, @mods, @plate, @state)', {
+            ['@steam'] = Player.PlayerData.steam,
+            ['@citizenid'] = Player.PlayerData.citizenid,
+            ['@vehicle'] = ShowroomVehicle.vehicle,
+            ['@hash'] = GetHashKey(ShowroomVehicle.vehicle),
+            ['@mods'] = '{}',
+            ['@plate'] = plate,
+            ['@state'] = 0
+        })
     elseif Player.PlayerData.money.bank >= VehPrice then
         Player.Functions.RemoveMoney('bank', VehPrice)
         TriggerClientEvent('qb-vehicleshop:client:ConfirmVehicle', src, ShowroomVehicle, plate)
-        QBCore.Functions.ExecuteSql(false, "INSERT INTO `player_vehicles` (`steam`, `citizenid`, `vehicle`, `hash`, `mods`, `plate`, `state`) VALUES ('"..Player.PlayerData.steam.."', '"..Player.PlayerData.citizenid.."', '"..ShowroomVehicle.vehicle.."', '"..GetHashKey(ShowroomVehicle.vehicle).."', '{}', '"..plate.."', 0)")
+        exports.ghmattimysql:execute('INSERT INTO player_vehicles (steam, citizenid, vehicle, hash, mods, plate, state) VALUES (@steam, @citizenid, @vehicle, @hash, @mods, @plate, @state)', {
+            ['@steam'] = Player.PlayerData.steam,
+            ['@citizenid'] = Player.PlayerData.citizenid,
+            ['@vehicle'] = ShowroomVehicle.vehicle,
+            ['@hash'] = GetHashKey(ShowroomVehicle.vehicle),
+            ['@mods'] = '{}',
+            ['@plate'] = plate,
+            ['@state'] = 0
+        })
     else
         if Player.PlayerData.money.cash > Player.PlayerData.money.bank then
             TriggerClientEvent('QBCore:Notify', src, 'You don\'t have enough money.. You are missing ('..(Player.PlayerData.money.cash - VehPrice)..',-)')
