@@ -341,7 +341,7 @@ AddEventHandler('qb-vehicleshop:client:ConfirmVehicle', function(Showroom, plate
         SetEntityAsMissionEntity(veh, true, true)
         SetEntityHeading(veh, QBCustom.VehicleBuyLocation.w)
         TriggerEvent('vehiclekeys:client:SetOwner', GetVehicleNumberPlateText(veh))
-        TriggerServerEvent('vehicletuning:server:SaveVehicleProps', QBCore.Functions.GetVehicleProperties(veh))
+        TriggerServerEvent('qb-vehicletuning:server:SaveVehicleProps', QBCore.Functions.GetVehicleProperties(veh))
     end, QBCustom.VehicleBuyLocation, false)
 end)
 
@@ -355,7 +355,7 @@ AddEventHandler('qb-vehicleshop:client:DoTestrit', function(plate)
             SetEntityAsMissionEntity(veh, true, true)
             SetEntityHeading(veh, QBCustom.VehicleBuyLocation.w)
             TriggerEvent('vehiclekeys:client:SetOwner', GetVehicleNumberPlateText(veh))
-            TriggerServerEvent('vehicletuning:server:SaveVehicleProps', QBCore.Functions.GetVehicleProperties(veh))
+            TriggerServerEvent('qb-vehicletuning:server:SaveVehicleProps', QBCore.Functions.GetVehicleProperties(veh))
             testritveh = veh
         end, QBCustom.VehicleBuyLocation, false)
     end
