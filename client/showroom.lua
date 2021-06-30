@@ -170,7 +170,7 @@ function ButtonSelected(button)
 			OpenMenu('offroad')
 		elseif btn == "SUVs" then
 			OpenMenu('suvs')
-		elseif btn == "Motoren" then
+		elseif btn == "Motorcycles" then
 			OpenMenu('motorcycles')
 		elseif btn == "Vans" then
 			OpenMenu('vans')
