@@ -34,7 +34,7 @@ AddEventHandler('qb-vehicleshop:server:buyVehicle', function(vehicleData, garage
         TriggerClientEvent("QBCore:Notify", src, "Success! Your vehicle has been delivered to "..QB.GarageLabel[garage], "success", 5000)
         pData.Functions.RemoveMoney('bank', vData["price"], "vehicle-bought-in-shop")
         TriggerEvent("qb-log:server:sendLog", cid, "vehiclebought", {model=vData["model"], name=vData["name"], from="garage", location=QB.GarageLabel[garage], moneyType="bank", price=vData["price"], plate=plate})
-        TriggerEvent("qb-log:server:CreateLog", "vehicleshop", "Voertuig gekocht (garage)", "green", "**"..GetPlayerName(src) .. "** heeft een " .. vData["name"] .. " gekocht voor $" .. vData["price"])
+        TriggerEvent("qb-log:server:CreateLog", "vehicleshop", "Vehicle purchased (garage)", "green", "**"..GetPlayerName(src) .. "** bought a " .. vData["name"] .. " for $" .. vData["price"])
     else
 		TriggerClientEvent("QBCore:Notify", src, "You don't have enough money, you're missing $"..format_thousand(vData["price"] - balance), "error", 5000)
     end
@@ -63,7 +63,7 @@ AddEventHandler('qb-vehicleshop:server:buyShowroomVehicle', function(vehicle, cl
         TriggerClientEvent('qb-vehicleshop:client:buyShowroomVehicle', src, vehicle, plate)
         pData.Functions.RemoveMoney('bank', vehiclePrice, "vehicle-bought-in-showroom")
         TriggerEvent("qb-log:server:sendLog", cid, "vehiclebought", {model=vehicle, name=QBCore.Shared.Vehicles[vehicle]["name"], from="showroom", moneyType="bank", price=QBCore.Shared.Vehicles[vehicle]["price"], plate=plate})
-        TriggerEvent("qb-log:server:CreateLog", "vehicleshop", "Voertuig gekocht (showroom)", "green", "**"..GetPlayerName(src) .. "** heeft een " .. QBCore.Shared.Vehicles[vehicle]["name"] .. " gekocht voor $" .. QBCore.Shared.Vehicles[vehicle]["price"])
+        TriggerEvent("qb-log:server:CreateLog", "vehicleshop", "Vehicle purchased (showroom)", "green", "**"..GetPlayerName(src) .. "** bought a " .. QBCore.Shared.Vehicles[vehicle]["name"] .. " for $" .. QBCore.Shared.Vehicles[vehicle]["price"])
     else
         TriggerClientEvent("QBCore:Notify", src, "You don't have enough money, you're missing $"..format_thousand(vehiclePrice - balance), "error", 5000)
     end
