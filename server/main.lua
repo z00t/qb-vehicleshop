@@ -34,7 +34,7 @@ AddEventHandler('qb-vehicleshop:server:buyVehicle', function(vehicleData, garage
         TriggerClientEvent("QBCore:Notify", src, "Success! Your vehicle has been delivered to "..QB.GarageLabel[garage], "success", 5000)
         pData.Functions.RemoveMoney('bank', vData["price"], "vehicle-bought-in-shop")
         TriggerEvent("qb-log:server:sendLog", cid, "vehiclebought", {model=vData["model"], name=vData["name"], from="garage", location=QB.GarageLabel[garage], moneyType="bank", price=vData["price"], plate=plate})
-        TriggerEvent("qb-log:server:CreateLog", "vehicleshop", "Vehicle purchased (garage)", "green", "**"..GetPlayerName(src) .. "** bougt a " .. vData["name"] .. " for $" .. vData["price"])
+        TriggerEvent("qb-log:server:CreateLog", "vehicleshop", "Vehicle purchased (garage)", "green", "**"..GetPlayerName(src) .. "** bought a " .. vData["name"] .. " for $" .. vData["price"])
     else
 		TriggerClientEvent("QBCore:Notify", src, "You don't have enough money, you're missing $"..format_thousand(vData["price"] - balance), "error", 5000)
     end
