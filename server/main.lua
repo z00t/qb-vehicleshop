@@ -18,8 +18,8 @@ AddEventHandler('qb-vehicleshop:server:buyVehicle', function(vehicleData, garage
     
     if (balance - vData["price"]) >= 0 then
         local plate = GeneratePlate()
-        exports.ghmattimysql:execute('INSERT INTO player_vehicles (steam, citizenid, vehicle, hash, mods, plate, garage) VALUES (@steam, @citizenid, @vehicle, @hash, @mods, @plate, @garage)', {
-            ['@steam'] = pData.PlayerData.steam,
+        exports.ghmattimysql:execute('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, garage) VALUES (@license, @citizenid, @vehicle, @hash, @mods, @plate, @garage)', {
+            ['@license'] = pData.PlayerData.license,
             ['@citizenid'] = cid,
             ['@vehicle'] = vData["model"],
             ['@hash'] = GetHashKey(vData["model"]),
@@ -46,8 +46,8 @@ AddEventHandler('qb-vehicleshop:server:buyShowroomVehicle', function(vehicle, cl
     local plate = GeneratePlate()
 
     if (balance - vehiclePrice) >= 0 then
-        exports.ghmattimysql:execute('INSERT INTO player_vehicles (steam, citizenid, vehicle, hash, mods, plate, state) VALUES (@steam, @citizenid, @vehicle, @hash, @mods, @plate, @state)', {
-            ['@steam'] = pData.PlayerData.steam,
+        exports.ghmattimysql:execute('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, state) VALUES (@license, @citizenid, @vehicle, @hash, @mods, @plate, @state)', {
+            ['@license'] = pData.PlayerData.license,
             ['@citizenid'] = cid,
             ['@vehicle'] = vehicle,
             ['@hash'] = GetHashKey(vehicle),
@@ -163,8 +163,8 @@ AddEventHandler('qb-vehicleshop:server:ConfirmVehicle', function(ShowroomVehicle
     if Player.PlayerData.money.cash >= VehPrice then
         Player.Functions.RemoveMoney('cash', VehPrice)
         TriggerClientEvent('qb-vehicleshop:client:ConfirmVehicle', src, ShowroomVehicle, plate)
-        exports.ghmattimysql:execute('INSERT INTO player_vehicles (steam, citizenid, vehicle, hash, mods, plate, state) VALUES (@steam, @citizenid, @vehicle, @hash, @mods, @plate, @state)', {
-            ['@steam'] = Player.PlayerData.steam,
+        exports.ghmattimysql:execute('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, state) VALUES (@license, @citizenid, @vehicle, @hash, @mods, @plate, @state)', {
+            ['@license'] = Player.PlayerData.license,
             ['@citizenid'] = Player.PlayerData.citizenid,
             ['@vehicle'] = ShowroomVehicle.vehicle,
             ['@hash'] = GetHashKey(ShowroomVehicle.vehicle),
@@ -175,8 +175,8 @@ AddEventHandler('qb-vehicleshop:server:ConfirmVehicle', function(ShowroomVehicle
     elseif Player.PlayerData.money.bank >= VehPrice then
         Player.Functions.RemoveMoney('bank', VehPrice)
         TriggerClientEvent('qb-vehicleshop:client:ConfirmVehicle', src, ShowroomVehicle, plate)
-        exports.ghmattimysql:execute('INSERT INTO player_vehicles (steam, citizenid, vehicle, hash, mods, plate, state) VALUES (@steam, @citizenid, @vehicle, @hash, @mods, @plate, @state)', {
-            ['@steam'] = Player.PlayerData.steam,
+        exports.ghmattimysql:execute('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, state) VALUES (@license, @citizenid, @vehicle, @hash, @mods, @plate, @state)', {
+            ['@license'] = Player.PlayerData.license,
             ['@citizenid'] = Player.PlayerData.citizenid,
             ['@vehicle'] = ShowroomVehicle.vehicle,
             ['@hash'] = GetHashKey(ShowroomVehicle.vehicle),
