@@ -49,8 +49,48 @@ Citizen.CreateThread(function()
 end)
 
 CustomVehicleCats = {
-    ['coupes'] = {
-        label = 'Geimporteerde Voertuigen',
+    ["coupes"] = {
+        label = "Coupes",
+        vehicles = {}
+    },
+    ["sedans"] = {
+        label = "Sedans",
+        vehicles = {}
+    },
+    ["muscle"] = {
+        label = "Muscle",
+        vehicles = {}
+    },
+    ["suvs"] = {
+        label = "SUVs",
+        vehicles = {}
+    },
+    ["compacts"] = {
+        label = "Compacts",
+        vehicles = {}
+    },
+    ["vans"] = {
+        label = "Vans",
+        vehicles = {}
+    },
+    ["super"] = {
+        label = "Super",
+        vehicles = {}
+    },
+    ["sports"] = {
+        label = "Sports",
+        vehicles = {}
+    },
+    ["sportsclassics"] = {
+        label = "Sports Classics",
+        vehicles = {}
+    },
+    ["motorcycles"] = {
+        label = "Motorcycles",
+        vehicles = {}
+    },
+    ["offroad"] = {
+        label = "Offroad",
         vehicles = {}
     },
 }
@@ -77,7 +117,7 @@ CustomVehicleShop = {
 			title = 'CATEGORIES',
 			name = 'main',
 			buttons = {
-				{name = 'Voertuigen', description = ''},
+				{name = 'Categories', description = ''},
 			}
 		},
 		['vehicles'] = {
@@ -495,13 +535,35 @@ function tablelength(T)
 end
 
 function CustomButtonSelected(button)
-	local ped = PlayerPedId()
 	local this = CustomVehicleShop.currentmenu
     local btn = button.name
-    
 	if this == 'main' then
-		if btn == 'Voertuigen' then
+		if btn == 'Categories' then
+			OpenCustomMenu('vehicles')
+		end
+	elseif this == "vehicles" then
+		if btn == "Sports" then
+			OpenCustomMenu('sports')
+		elseif btn == "Sedans" then
+			OpenCustomMenu('sedans')
+		elseif btn == "Compacts" then
+			OpenCustomMenu('compacts')
+		elseif btn == "Coupes" then
 			OpenCustomMenu('coupes')
+		elseif btn == "Sports Classics" then
+			OpenCustomMenu("sportsclassics")
+		elseif btn == "Super" then
+			OpenCustomMenu('super')
+		elseif btn == "Muscle" then
+			OpenCustomMenu('muscle')
+		elseif btn == "Offroad" then
+			OpenCustomMenu('offroad')
+		elseif btn == "SUVs" then
+			OpenCustomMenu('suvs')
+		elseif btn == "Motorcycles" then
+			OpenCustomMenu('motorcycles')
+		elseif btn == "Vans" then
+			OpenCustomMenu('vans')
 		end
 	end
 end
