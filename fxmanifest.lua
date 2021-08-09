@@ -2,9 +2,7 @@ fx_version 'cerulean'
 game 'gta5'
 
 description 'QB-VehicleShop'
-version '1.0.0'
-
-ui_page 'html/index.html'
+version '2.0.0'
 
 shared_scripts { 
 	'@qb-core/import.lua',
@@ -12,18 +10,9 @@ shared_scripts {
 }
 
 client_scripts {
-    'client/main.lua',
-    'client/showroom.lua',
-    'client/customshowroom.lua',
+    'client/*.lua',
 }
 
-server_script 'server/main.lua'
-
-files {
-    'html/index.html',
-    'html/style.css',
-    'html/reset.css',
-    'html/script.js',
-    'html/img/*.png',
-    'html/img/site-bg.jpg',
+server_scripts {
+    'server/*.lua',
 }
