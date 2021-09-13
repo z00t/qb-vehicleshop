@@ -18,7 +18,7 @@ AddEventHandler('qb-vehicleshop:server:buyShowroomVehicle', function(vehicle)
     local plate = GeneratePlate()
 
     if (cash - vehiclePrice) >= 0 then
-        exports.oxmysql:insert('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, state) VALUES (?)', {
+        exports.oxmysql:insert('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, state) VALUES (?, ?, ?, ?, ?, ?, ?)', {
             pData.PlayerData.license,
             cid,
             vehicle,
@@ -32,7 +32,7 @@ AddEventHandler('qb-vehicleshop:server:buyShowroomVehicle', function(vehicle)
         pData.Functions.RemoveMoney('cash', vehiclePrice, "vehicle-bought-in-showroom")
         TriggerEvent("qb-log:server:CreateLog", "vehicleshop", "Vehicle purchased (showroom)", "green", "**"..GetPlayerName(src) .. "** bought a " .. QBCore.Shared.Vehicles[vehicle]["name"] .. " for $" .. vehiclePrice .. " with cash")
     elseif (bank - vehiclePrice) >= 0 then
-        exports.oxmysql:insert('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, state) VALUES (?)', {
+        exports.oxmysql:insert('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, state) VALUES (?, ?, ?, ?, ?, ?, ?)', {
             pData.PlayerData.license,
             cid,
             vehicle,
