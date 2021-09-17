@@ -313,7 +313,7 @@ Citizen.CreateThread(function()
                         ClearPedTasksImmediately(PlayerPedId())
                     end
 
-                    if IsControlJustPressed(0, 38) then
+                    if IsControlJustPressed(0, 38) and CheckJob() then
                         if not QB.VehicleShops[ClosestShopIndex]["opened"] then
                             if not buySure then
                                 buySure = true
@@ -541,16 +541,16 @@ end
 
 function CheckJob()
     if PlayerJob ~= nil then
-        if type(QB.VehicleShops[ClosestShopIndex]["OwnedJob"]) == "table" then
+        if QB.VehicleShops[ClosestShopIndex]["OwnedJob"] == false then
+            return true
+        elseif type(QB.VehicleShops[ClosestShopIndex]["OwnedJob"]) == "table" then
             for k, v in pairs(QB.VehicleShops[ClosestShopIndex]["OwnedJob"]) do
                 if PlayerJob.name == v then
                     return true
                 end
             end
-        else
-            if PlayerJob.name == QB.VehicleShops[ClosestShopIndex]["OwnedJob"] then
-                return true
-            end
+        elseif PlayerJob.name == QB.VehicleShops[ClosestShopIndex]["OwnedJob"] then
+            return true
         end
     end
     return false
