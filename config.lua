@@ -129,28 +129,28 @@ QB.VehicleShops = {
         ["OwnedJob"] = "cardealer", -- false or a job inside a string like "cardealer"
         ["ShowroomVehicles"] = {
             [1] = {
-                coords = vector4(-75.96, 74.78, 71.27, 221.69),
+                coords = vector4(-75.8646, 74.98480, 70.912, 220.9),
                 defaultVehicle = 'italirsx', -- The vehicle that needs to be there on restart
                 chosenVehicle = 'italirsx', -- Keep this the same as defaultvehicle
                 inUse = false, -- When changing vehicle this gets set to true, don't change
                 buying = false, -- When buying a vehicle from an owned job this gets set to true, don't change
             }, 
             [2] = {
-                coords = vector4(-66.52, 74.33, 71.0, 188.03),
+                coords = vector4(-67.1632, 75.12112, 70.619, 209.6),
                 defaultVehicle = 'italigtb',
                 chosenVehicle = 'italigtb',
                 inUse = false,
                 buying = false,
             }, 
             [3] = {
-                coords = vector4(-71.83, 68.60, 71.12, 276.57),
+                coords = vector4(-71.2526, 68.58513, 70.767, 294.0),
                 defaultVehicle = 'nero',
                 chosenVehicle = 'nero',
                 inUse = false,
                 buying = false,
             }, 
             [4] = {
-                coords = vector4(-59.95, 68.61, 71.24, 181.44),
+                coords = vector4(-60.2645, 70.81430, 70.826, 113.1),
                 defaultVehicle = 'comet2',
                 chosenVehicle = 'comet2',
                 inUse = false,
