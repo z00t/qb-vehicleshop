@@ -397,14 +397,14 @@ AddEventHandler('qb-vehicleshop:client:SetVehicleBuying', function(slot)
 end)
 
 RegisterNetEvent('qb-vehicleshop:client:setShowroomCarInUse')
-AddEventHandler('qb-vehicleshop:client:setShowroomCarInUse', function(showroomVehicle, inUse)
-    QB.VehicleShops[ClosestShopIndex]["ShowroomVehicles"][showroomVehicle].inUse = inUse
+AddEventHandler('qb-vehicleshop:client:setShowroomCarInUse', function(showroomVehicle, inUse, currentindex)
+    QB.VehicleShops[currentindex]["ShowroomVehicles"][showroomVehicle].inUse = inUse
 end)
 
 RegisterNetEvent('qb-vehicleshop:client:setShowroomVehicle')
-AddEventHandler('qb-vehicleshop:client:setShowroomVehicle', function(showroomVehicle, k)
-    if QB.VehicleShops[ClosestShopIndex]["ShowroomVehicles"][k].chosenVehicle ~= showroomVehicle then
-        QBCore.Functions.DeleteVehicle(GetClosestVehicle(QB.VehicleShops[ClosestShopIndex]["ShowroomVehicles"][k].coords.x, QB.VehicleShops[ClosestShopIndex]["ShowroomVehicles"][k].coords.y, QB.VehicleShops[ClosestShopIndex]["ShowroomVehicles"][k].coords.z, 3.0, 0, 70))
+AddEventHandler('qb-vehicleshop:client:setShowroomVehicle', function(showroomVehicle, k, currentIndex)
+    if QB.VehicleShops[currentIndex]["ShowroomVehicles"][k].chosenVehicle ~= showroomVehicle then
+        QBCore.Functions.DeleteVehicle(GetClosestVehicle(QB.VehicleShops[currentIndex]["ShowroomVehicles"][k].coords.x, QB.VehicleShops[currentIndex]["ShowroomVehicles"][k].coords.y, QB.VehicleShops[currentIndex]["ShowroomVehicles"][k].coords.z, 3.0, 0, 70))
         modelLoaded = false
         Wait(250)
         local model = GetHashKey(showroomVehicle)
@@ -412,16 +412,16 @@ AddEventHandler('qb-vehicleshop:client:setShowroomVehicle', function(showroomVeh
         while not HasModelLoaded(model) do
             Citizen.Wait(250)
         end
-        local veh = CreateVehicle(model, QB.VehicleShops[ClosestShopIndex]["ShowroomVehicles"][k].coords.x, QB.VehicleShops[ClosestShopIndex]["ShowroomVehicles"][k].coords.y, QB.VehicleShops[ClosestShopIndex]["ShowroomVehicles"][k].coords.z, false, false)
+        local veh = CreateVehicle(model, QB.VehicleShops[currentIndex]["ShowroomVehicles"][k].coords.x, QB.VehicleShops[currentIndex]["ShowroomVehicles"][k].coords.y, QB.VehicleShops[currentIndex]["ShowroomVehicles"][k].coords.z, false, false)
         SetModelAsNoLongerNeeded(model)
         SetVehicleOnGroundProperly(veh)
         SetEntityInvincible(veh,true)
-        SetEntityHeading(veh, QB.VehicleShops[ClosestShopIndex]["ShowroomVehicles"][k].coords.w)
+        SetEntityHeading(veh, QB.VehicleShops[currentIndex]["ShowroomVehicles"][k].coords.w)
         SetVehicleDoorsLocked(veh, 3)
         FreezeEntityPosition(veh, true)
         SetVehicleNumberPlateText(veh, k .. "CARSALE")
         modelLoaded = true
-        QB.VehicleShops[ClosestShopIndex]["ShowroomVehicles"][k].chosenVehicle = showroomVehicle
+        QB.VehicleShops[currentIndex]["ShowroomVehicles"][k].chosenVehicle = showroomVehicle
     end
 end)
 

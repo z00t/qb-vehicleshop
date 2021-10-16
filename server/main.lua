@@ -92,13 +92,13 @@ end
 RegisterServerEvent('qb-vehicleshop:server:setShowroomCarInUse')
 AddEventHandler('qb-vehicleshop:server:setShowroomCarInUse', function(showroomVehicle, bool, currentindex)
     QB.VehicleShops[currentindex]["ShowroomVehicles"][showroomVehicle].inUse = bool
-    TriggerClientEvent('qb-vehicleshop:client:setShowroomCarInUse', -1, showroomVehicle, bool)
+    TriggerClientEvent('qb-vehicleshop:client:setShowroomCarInUse', -1, showroomVehicle, bool, currentindex)
 end)
 
 RegisterServerEvent('qb-vehicleshop:server:setShowroomVehicle')
 AddEventHandler('qb-vehicleshop:server:setShowroomVehicle', function(vData, k, currentindex)
     QB.VehicleShops[currentindex]["ShowroomVehicles"][k].chosenVehicle = vData
-    TriggerClientEvent('qb-vehicleshop:client:setShowroomVehicle', -1, vData, k)
+    TriggerClientEvent('qb-vehicleshop:client:setShowroomVehicle', -1, vData, k, currentindex)
 end)
 
 function CheckOwnedJob(source, grade)
