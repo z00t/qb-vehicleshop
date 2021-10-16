@@ -129,13 +129,13 @@ QBCore.Commands.Add("sell", "Sell Vehicle (Car Dealer Only)", {{name="ID", help=
             if #(GetEntityCoords(GetPlayerPed(source)) - GetEntityCoords(GetPlayerPed(TargetId))) < 3.0 then
                 TriggerClientEvent('qb-vehicleshop:client:SellCustomVehicle', source, TargetId)
             else
-                TriggerClientEvent('QBCore:Notify', source, 'The provided Player with ID '..TargetId..' is not nearby', 'error')
+                TriggerClientEvent('QBCore:Notify', source, 'The provided Player with ID '..TargetId..' is not nearby.', 'error')
             end
         else
             TriggerClientEvent('QBCore:Notify', source, 'You must provide a Player ID!', 'error')
         end
     else
-        TriggerClientEvent('QBCore:Notify', source, "You don't have access to this command", 'error')
+        TriggerClientEvent('QBCore:Notify', source, "You don't have access to this command.", 'error')
     end
 end)
 
@@ -143,7 +143,7 @@ QBCore.Commands.Add("testdrive", "Test Drive Vehicle (Car Dealer Only)", {}, fal
     if CheckOwnedJob(source) then
         TriggerClientEvent('qb-vehicleshop:client:DoTestrit', source, GeneratePlate())
     else
-        TriggerClientEvent('QBCore:Notify', source, "You don't have access to this command", 'error')
+        TriggerClientEvent('QBCore:Notify', source, "You don't have access to this command.", 'error')
     end
 end)
 
