@@ -1,8 +1,8 @@
 fx_version 'cerulean'
 game 'gta5'
 
-description 'qb-testvehshop'
-version '0.0.1'
+description 'qb-vehicleshop'
+version '2.0.0'
 
 shared_script 'config.lua'
 
