@@ -1,18 +1,18 @@
 fx_version 'cerulean'
 game 'gta5'
 
-description 'QB-VehicleShop'
-version '2.0.0'
+description 'qb-testvehshop'
+version '0.0.1'
 
-shared_scripts { 
-	'@qb-core/import.lua',
-	'config.lua'
-}
+shared_script 'config.lua'
 
 client_scripts {
-    'client/*.lua',
+    '@PolyZone/client.lua',
+    '@PolyZone/BoxZone.lua',
+    '@PolyZone/EntityZone.lua',
+    '@PolyZone/CircleZone.lua',
+    '@PolyZone/ComboZone.lua',
+    'client.lua'
 }
 
-server_scripts {
-    'server/*.lua',
-}
+server_script 'server.lua'
