@@ -417,7 +417,7 @@ RegisterNetEvent('qb-vehicleshop:server:checkFinance', function()
     local player = QBCore.Functions.GetPlayer(src)
     local result = exports.oxmysql:executeSync('SELECT * FROM player_vehicles WHERE citizenid = ?', {player.PlayerData.citizenid})
     for k,v in pairs(result) do
-        if v.financetime < 1 and v.balance > 1 then
+        if v.balance > 1 and v.financetime < 1 then
             paymentDue = true
         end
     end
