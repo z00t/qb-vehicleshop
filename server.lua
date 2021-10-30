@@ -426,7 +426,7 @@ RegisterNetEvent('qb-vehicleshop:server:checkFinance', function()
         Wait(Config.PaymentWarning * 60000)
         exports.oxmysql:execute('SELECT * FROM player_vehicles WHERE citizenid = ?', {player.PlayerData.citizenid}, function(vehicles)
             for k,v in pairs(vehicles) do
-                if v.financetime < 1 and v.balance >= 1 then
+                if v.balance >= 1 and v.financetime < 1 then
                     local plate = v.plate
                     exports.oxmysql:execute('DELETE FROM player_vehicles WHERE plate = @plate', {['@plate'] = plate})
                     TriggerClientEvent('QBCore:Notify', src, 'Your vehicle with plate '..plate..' has been repossessed', 'error')
