@@ -579,8 +579,6 @@ RegisterNetEvent('qb-vehicleshop:client:swapVehicle', function(data)
         FreezeEntityPosition(veh, true)
         SetVehicleNumberPlateText(veh, 'BUY ME')
         Config.Shops[data.ClosestShop]["ShowroomVehicles"][data.ClosestVehicle].chosenVehicle = data.toVehicle
-        Wait(1000) -- Must wait 1000 for our closest vehicle function to refresh
-        exports['qb-menu']:openMenu(vehicleMenu)
     end
 end)
 
