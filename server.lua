@@ -109,7 +109,7 @@ RegisterNetEvent('qb-vehicleshop:server:swapVehicle', function(data)
     local src = source
     Config.Shops[data.ClosestShop]['ShowroomVehicles'][data.ClosestVehicle].chosenVehicle = data.toVehicle
     TriggerClientEvent('qb-vehicleshop:client:swapVehicle', -1, data)
-    Wait(1000) -- let new car spawn
+    Wait(1500) -- let new car spawn
     TriggerClientEvent('qb-vehicleshop:client:homeMenu', src) -- reopen main menu
 end)
 
