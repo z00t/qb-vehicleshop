@@ -550,7 +550,7 @@ RegisterNetEvent('qb-vehicleshop:client:openCustomFinance', function(data)
                 type = 'number',
                 isRequired = true,
                 name = 'paymentAmount',
-                text = 'Total Payments - Min 24'
+                text = 'Total Payments - Max '..Config.MaximumPayments
             }
         }
     })
