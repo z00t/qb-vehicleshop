@@ -17,7 +17,9 @@ RegisterNetEvent('qb-vehicleshop:server:removePlayer', function(citizenid)
         local financetime = exports.oxmysql:executeSync('SELECT * FROM player_vehicles WHERE citizenid = ?', {citizenid})
         for k,v in pairs(financetime) do
             if v.balance >= 1 then
-                exports.oxmysql:update('UPDATE player_vehicles SET financetime = ? WHERE plate = ?', {math.floor(v.financetime - (((GetGameTimer() - playTime) / 1000) / 60)), v.plate})
+                local newTime = math.floor(v.financetime - (((GetGameTimer() - playTime) / 1000) / 60))
+                if newTime < 0 then newTime = 0 end
+                exports.oxmysql:update('UPDATE player_vehicles SET financetime = ? WHERE plate = ?', {newTime, v.plate})
             end
         end
     end
@@ -39,7 +41,9 @@ AddEventHandler('playerDropped', function()
                 if financetimer[v.citizenid] then
                     local playTime = financetimer[v.citizenid]
                     if v.balance >= 1 then
-                        exports.oxmysql:update('UPDATE player_vehicles SET financetime = ? WHERE plate = ?', {math.floor(v.financetime - (((GetGameTimer() - playTime) / 1000) / 60)), v.plate})
+                        local newTime = math.floor(v.financetime - (((GetGameTimer() - playTime) / 1000) / 60))
+                        if newTime < 0 then newTime = 0 end
+                        exports.oxmysql:update('UPDATE player_vehicles SET financetime = ? WHERE plate = ?', {newTime, v.plate})
                         financetimer[v.citizenid] = {}
                     end
                 end
