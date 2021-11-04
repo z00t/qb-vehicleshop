@@ -563,7 +563,9 @@ end)
 
 RegisterNetEvent('qb-vehicleshop:client:swapVehicle', function(data)
     if Config.Shops[data.ClosestShop]["ShowroomVehicles"][data.ClosestVehicle].chosenVehicle ~= data.toVehicle then
-        QBCore.Functions.DeleteVehicle(GetClosestVehicle(Config.Shops[data.ClosestShop]["ShowroomVehicles"][data.ClosestVehicle].coords.x, Config.Shops[data.ClosestShop]["ShowroomVehicles"][data.ClosestVehicle].coords.y, Config.Shops[data.ClosestShop]["ShowroomVehicles"][data.ClosestVehicle].coords.z, 3.0, 0, 70))
+        local closestVehicle, closestDistance = QBCore.Functions.GetClosestVehicle()
+        if closestVehicle == 0 then return end
+        if closestDistance < 5 then QBCore.Functions.DeleteVehicle(closestVehicle) end
         Wait(250)
         local model = GetHashKey(data.toVehicle)
         RequestModel(model)
