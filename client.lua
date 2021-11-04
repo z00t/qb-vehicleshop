@@ -1,8 +1,8 @@
 -- Variables
 local QBCore = exports['qb-core']:GetCoreObject()
 local PlayerData = QBCore.Functions.GetPlayerData() -- Just for resource restart (same as event handler)
-local inPDM, pdmVehiclesSpawned = false, false
-local inLuxury, luxVehiclesSpawned = false, false
+local inPDM = false
+local inLuxury = false
 local testDriveVeh, inTestDrive = 0, false
 local ClosestVehicle, ClosestShop = 1, nil
 local zones = {}
@@ -146,7 +146,7 @@ local function startTestDriveTimer(testDriveTime)
     end)
 end
 
-local function createVehZones() -- This will create an entity zone if config is true that you can use to target and open the vehicle menu
+local function createVehZones(ClosestShop) -- This will create an entity zone if config is true that you can use to target and open the vehicle menu
     if not Config.UsingTarget then
         for i = 1, #Config.Shops[ClosestShop]['ShowroomVehicles'] do
             zones[#zones+1] = BoxZone:Create(
@@ -190,27 +190,6 @@ local function createVehZones() -- This will create an entity zone if config is 
     end
 end
 
-local function spawnVehicles()
-    for i = 1, #Config.Shops[ClosestShop]['ShowroomVehicles'] do
-        local model = GetHashKey(Config.Shops[ClosestShop]["ShowroomVehicles"][i].defaultVehicle)
-        RequestModel(model)
-        while not HasModelLoaded(model) do
-            Wait(0)
-        end
-        local veh = CreateVehicle(model, Config.Shops[ClosestShop]["ShowroomVehicles"][i].coords.x, Config.Shops[ClosestShop]["ShowroomVehicles"][i].coords.y, Config.Shops[ClosestShop]["ShowroomVehicles"][i].coords.z, false, false)
-        SetModelAsNoLongerNeeded(model)
-        SetEntityAsMissionEntity(veh, true, true)
-        SetVehicleOnGroundProperly(veh)
-        SetEntityInvincible(veh,true)
-        SetVehicleDirtLevel(veh, 0.0)
-        SetVehicleDoorsLocked(veh, 3)
-        SetEntityHeading(veh, Config.Shops[ClosestShop]["ShowroomVehicles"][i].coords.w)
-        FreezeEntityPosition(veh,true)
-        SetVehicleNumberPlateText(veh, 'BUY ME')
-        createVehZones()
-    end
-end
-
 -- Zones
 
 local pdm = PolyZone:Create({
@@ -232,10 +211,6 @@ pdm:onPlayerInOut(function(isPointInside)
     if isPointInside then
         ClosestShop = 'pdm'
         inPDM = true
-        if not pdmVehiclesSpawned then
-            pdmVehiclesSpawned = true
-            spawnVehicles()
-        end
         CreateThread(function()
             while inPDM do
                 setClosestShowroomVehicle()
@@ -309,10 +284,6 @@ luxury:onPlayerInOut(function(isPointInside)
     if isPointInside then
         ClosestShop = 'luxury'
         inLuxury = true
-        if not luxVehiclesSpawned then
-            luxVehiclesSpawned = true
-            spawnVehicles()
-        end
         CreateThread(function()
             while inLuxury and PlayerData.job.name == Config.Shops['luxury']['Job'] do
                 setClosestShowroomVehicle()
@@ -563,7 +534,7 @@ end)
 
 RegisterNetEvent('qb-vehicleshop:client:swapVehicle', function(data)
     if Config.Shops[data.ClosestShop]["ShowroomVehicles"][data.ClosestVehicle].chosenVehicle ~= data.toVehicle then
-        local closestVehicle, closestDistance = QBCore.Functions.GetClosestVehicle()
+        local closestVehicle, closestDistance = QBCore.Functions.GetClosestVehicle(vector3(Config.Shops[data.ClosestShop]["ShowroomVehicles"][data.ClosestVehicle].coords.x, Config.Shops[data.ClosestShop]["ShowroomVehicles"][data.ClosestVehicle].coords.y, Config.Shops[data.ClosestShop]["ShowroomVehicles"][data.ClosestVehicle].coords.z))
         if closestVehicle == 0 then return end
         if closestDistance < 5 then QBCore.Functions.DeleteVehicle(closestVehicle) end
         Wait(250)
@@ -721,4 +692,27 @@ CreateThread(function()
             exports['qb-menu']:closeMenu()
         end
     end)
+end)
+
+CreateThread(function()
+    for k,v in pairs(Config.Shops) do
+        for i = 1, #Config.Shops[k]['ShowroomVehicles'] do
+            local model = GetHashKey(Config.Shops[k]["ShowroomVehicles"][i].defaultVehicle)
+            RequestModel(model)
+            while not HasModelLoaded(model) do
+                Wait(0)
+            end
+            local veh = CreateVehicle(model, Config.Shops[k]["ShowroomVehicles"][i].coords.x, Config.Shops[k]["ShowroomVehicles"][i].coords.y, Config.Shops[k]["ShowroomVehicles"][i].coords.z, false, false)
+            SetModelAsNoLongerNeeded(model)
+            SetEntityAsMissionEntity(veh, true, true)
+            SetVehicleOnGroundProperly(veh)
+            SetEntityInvincible(veh,true)
+            SetVehicleDirtLevel(veh, 0.0)
+            SetVehicleDoorsLocked(veh, 3)
+            SetEntityHeading(veh, Config.Shops[k]["ShowroomVehicles"][i].coords.w)
+            FreezeEntityPosition(veh,true)
+            SetVehicleNumberPlateText(veh, 'BUY ME')
+            createVehZones(k)
+        end
+    end
 end)
