@@ -453,7 +453,7 @@ QBCore.Commands.Add('transferVehicle', 'Gift or sell your vehicle', {{ name = 'a
     if vehicle == 0 then return TriggerClientEvent('QBCore:Notify', src, 'Must be in a vehicle', 'error') end
     local driver = GetPedInVehicleSeat(vehicle, -1)
     local passenger = GetPedInVehicleSeat(vehicle, 0)
-    local plate = GetVehicleNumberPlateText(vehicle)
+    local plate = QBCore.Functions.GetPlate(vehicle)
     local isOwned = exports.oxmysql:scalarSync('SELECT citizenid FROM player_vehicles WHERE plate = ?', {plate})
     if isOwned ~= citizenid then return TriggerClientEvent('QBCore:Notify', src, 'You dont own this vehicle', 'error') end
     if ped ~= driver then return TriggerClientEvent('QBCore:Notify', src, 'Must be driver', 'error') end
