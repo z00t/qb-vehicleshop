@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `player_vehicles` (
   `vehicle` varchar(50) DEFAULT NULL,
   `hash` varchar(50) DEFAULT NULL,
   `mods` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `plate` varchar(50) NOT NULL,
+  `plate` varchar(15) NOT NULL,
   `fakeplate` varchar(50) DEFAULT NULL,
   `garage` varchar(50) DEFAULT NULL,
   `fuel` int(11) DEFAULT 100,
@@ -24,3 +24,10 @@ CREATE TABLE IF NOT EXISTS `player_vehicles` (
   KEY `citizenid` (`citizenid`),
   KEY `license` (`license`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1;
+
+ALTER TABLE `player_vehicles`
+ADD UNIQUE INDEX UK_playervehicles_plate (plate);
+
+ALTER TABLE `player_vehicles`
+ADD CONSTRAINT FK_playervehicles_players FOREIGN KEY (citizenid)
+REFERENCES `players` (citizenid) ON DELETE CASCADE ON UPDATE CASCADE;
