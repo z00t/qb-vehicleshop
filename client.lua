@@ -675,15 +675,17 @@ end)
 
 CreateThread(function()
     for k,v in pairs(Config.Shops) do
-        local Dealer = AddBlipForCoord(Config.Shops[k]["Location"])
-        SetBlipSprite (Dealer, 326)
-        SetBlipDisplay(Dealer, 4)
-        SetBlipScale  (Dealer, 0.75)
-        SetBlipAsShortRange(Dealer, true)
-        SetBlipColour(Dealer, 3)
-        BeginTextCommandSetBlipName("STRING")
-        AddTextComponentSubstringPlayerName(Config.Shops[k]["ShopLabel"])
-        EndTextCommandSetBlipName(Dealer)
+        if v.showBlip then
+	    local Dealer = AddBlipForCoord(Config.Shops[k]["Location"])
+	    SetBlipSprite (Dealer, 326)
+            SetBlipDisplay(Dealer, 4)
+            SetBlipScale  (Dealer, 0.75)
+	    SetBlipAsShortRange(Dealer, true)
+	    SetBlipColour(Dealer, 3)
+            BeginTextCommandSetBlipName("STRING")
+	    AddTextComponentSubstringPlayerName(Config.Shops[k]["ShopLabel"])
+	    EndTextCommandSetBlipName(Dealer)
+	end
     end
 end)
 
