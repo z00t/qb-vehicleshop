@@ -23,7 +23,7 @@ RegisterNetEvent('qb-vehicleshop:server:removePlayer', function(citizenid)
             end
         end
     end
-    financetimer[citizenid] = {}
+    financetimer[citizenid] = nil
 end)
 
 -- Deduct stored game time from player on quit because we can't get citizenid
@@ -36,19 +36,17 @@ AddEventHandler('playerDropped', function()
     end
     if license then
         local vehicles = exports.oxmysql:executeSync('SELECT * FROM player_vehicles WHERE license = ?', {license})
-        if vehicles then
+        if vehicles and financetimer[v.citizenid] then
             for k,v in pairs(vehicles) do
-                if financetimer[v.citizenid] then
-                    local playTime = financetimer[v.citizenid]
-                    if v.balance >= 1 then
-                        local newTime = math.floor(v.financetime - (((GetGameTimer() - playTime) / 1000) / 60))
-                        if newTime < 0 then newTime = 0 end
-                        exports.oxmysql:update('UPDATE player_vehicles SET financetime = ? WHERE plate = ?', {newTime, v.plate})
-                        financetimer[v.citizenid] = {}
-                    end
+                local playTime = financetimer[v.citizenid]
+                if v.balance >= 1 then
+                    local newTime = math.floor(v.financetime - (((GetGameTimer() - playTime) / 1000) / 60))
+                    if newTime < 0 then newTime = 0 end
+                    exports.oxmysql:update('UPDATE player_vehicles SET financetime = ? WHERE plate = ?', {newTime, v.plate})
                 end
             end
         end
+        financetimer[v.citizenid] = nil
     end
 end)
 
