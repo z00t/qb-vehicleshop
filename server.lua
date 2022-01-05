@@ -36,7 +36,7 @@ AddEventHandler('playerDropped', function()
     end
     if license then
         local vehicles = exports.oxmysql:executeSync('SELECT * FROM player_vehicles WHERE license = ?', {license})
-        if vehicles and financetimer[v.citizenid] then
+        if vehicles then
             for k,v in pairs(vehicles) do
                 local playTime = financetimer[v.citizenid]
                 if v.balance >= 1 then
@@ -45,8 +45,8 @@ AddEventHandler('playerDropped', function()
                     exports.oxmysql:update('UPDATE player_vehicles SET financetime = ? WHERE plate = ?', {newTime, v.plate})
                 end
             end
-        end
-        financetimer[v.citizenid] = nil
+            if vehicles[1] and financetimer[vehicles[1].citizenid] then financetimer[vehicles[1].citizenid] = nil end
+        end   
     end
 end)
 
