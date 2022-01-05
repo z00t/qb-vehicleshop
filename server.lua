@@ -45,8 +45,8 @@ AddEventHandler('playerDropped', function()
                     exports.oxmysql:update('UPDATE player_vehicles SET financetime = ? WHERE plate = ?', {newTime, v.plate})
                 end
             end
-        end
-        financetimer[v.citizenid] = nil
+            if vehicles[1] and financetimer[vehicles[1].citizenid] then financetimer[vehicles[1].citizenid] = nil end
+        end   
     end
 end)
 
