@@ -36,7 +36,7 @@ AddEventHandler('playerDropped', function()
     end
     if license then
         local vehicles = exports.oxmysql:executeSync('SELECT * FROM player_vehicles WHERE license = ?', {license})
-        if vehicles and financetimer[v.citizenid] then
+        if vehicles then
             for k,v in pairs(vehicles) do
                 local playTime = financetimer[v.citizenid]
                 if v.balance >= 1 then
