@@ -304,34 +304,34 @@ function createManagedShop(shopShape, name, jobName)
                         },
                         {
                             header = 'Test Drive',
-                            txt = 'Send the closest citizen for a test drive',
+                            txt = 'Allow player for test drive',
                             params = {
-                                isServer = true,
-                                event = 'qb-vehicleshop:server:customTestDrive',
+                                event = 'qb-vehicleshop:client:openIdMenu',
                                 args = {
-                                    testVehicle = Config.Shops[closestShop]["ShowroomVehicles"][ClosestVehicle].chosenVehicle
+                                    vehicle = Config.Shops[closestShop]["ShowroomVehicles"][ClosestVehicle].chosenVehicle,
+                                    type = 'testDrive'
                                 }
                             }
                         },
                         {
                             header = "Sell Vehicle",
-                            txt = 'Sell vehicle to closest citizen',
+                            txt = 'Sell vehicle to Player',
                             params = {
-                                isServer = true,
-                                event = 'qb-vehicleshop:server:sellShowroomVehicle',
+                                event = 'qb-vehicleshop:client:openIdMenu',
                                 args = {
-                                    buyVehicle = Config.Shops[closestShop]["ShowroomVehicles"][ClosestVehicle].chosenVehicle
+                                    vehicle = Config.Shops[closestShop]["ShowroomVehicles"][ClosestVehicle].chosenVehicle,
+                                    type = 'sellVehicle'
                                 }
                             }
                         },
                         {
                             header = 'Finance Vehicle',
-                            txt = 'Finance vehicle to closest citizen',
+                            txt = 'Finance vehicle to Player',
                             params = {
                                 event = 'qb-vehicleshop:client:openCustomFinance',
                                 args = {
                                     price = getVehPrice(),
-                                    buyVehicle = Config.Shops[closestShop]["ShowroomVehicles"][ClosestVehicle].chosenVehicle
+                                    vehicle = Config.Shops[closestShop]["ShowroomVehicles"][ClosestVehicle].chosenVehicle
                                 }
                             }
                         },
@@ -407,7 +407,7 @@ RegisterNetEvent('qb-vehicleshop:client:customTestDrive', function(data)
     if not inTestDrive then
         inTestDrive = true
         shopInsideOf = getShopInsideOf()
-        local vehicle = data.testVehicle
+        local vehicle = data
         local prevCoords = GetEntityCoords(PlayerPedId())
         QBCore.Functions.SpawnVehicle(vehicle, function(veh)
             local shopInsideOf = getShopInsideOf()
@@ -530,7 +530,7 @@ end)
 RegisterNetEvent('qb-vehicleshop:client:openCustomFinance', function(data)
     TriggerEvent('animations:client:EmoteCommandStart', {"tablet2"})
     local dialog = exports['qb-input']:ShowInput({
-        header = getVehBrand():upper().. ' ' ..data.buyVehicle:upper().. ' - $' ..data.price,
+        header = getVehBrand():upper().. ' ' ..data.vehicle:upper().. ' - $' ..data.price,
         submitText = "Submit",
         inputs = {
             {
@@ -544,13 +544,19 @@ RegisterNetEvent('qb-vehicleshop:client:openCustomFinance', function(data)
                 isRequired = true,
                 name = 'paymentAmount',
                 text = 'Total Payments - Max '..Config.MaximumPayments
+            },
+            {
+                text = "Server ID (#)",
+                name = "playerid", 
+                type = "number",
+                isRequired = true
             }
         }
     })
     if dialog then
-        if not dialog.downPayment or not dialog.paymentAmount then return end
+        if not dialog.downPayment or not dialog.paymentAmount or not dialog.playerid then return end
         TriggerEvent('animations:client:EmoteCommandStart', {"c"})
-        TriggerServerEvent('qb-vehicleshop:server:sellfinanceVehicle', dialog.downPayment, dialog.paymentAmount, data.buyVehicle)
+        TriggerServerEvent('qb-vehicleshop:server:sellfinanceVehicle', dialog.downPayment, dialog.paymentAmount, data.vehicle, dialog.playerid)
     end
 end)
 
@@ -681,6 +687,29 @@ RegisterNetEvent('qb-vehicleshop:client:financePayment', function(data)
     if dialog then
         if not dialog.paymentAmount then return end
         TriggerServerEvent('qb-vehicleshop:server:financePayment', dialog.paymentAmount, data.vehData)
+    end
+end)
+
+RegisterNetEvent('qb-vehicleshop:client:openIdMenu', function(data)
+    local dialog = exports['qb-input']:ShowInput({
+        header = QBCore.Shared.Vehicles[data.vehicle]["name"],
+        submitText = "Submit",
+        inputs = {
+            {
+                text = "Server ID (#)",
+                name = "playerid", 
+                type = "number",
+                isRequired = true
+            }
+        }
+    })
+    if dialog then
+        if not dialog.playerid then return end
+        if data.type == 'testDrive' then
+            TriggerServerEvent('qb-vehicleshop:server:customTestDrive', data.vehicle, dialog.playerid)
+        elseif data.type == 'sellVehicle' then
+            TriggerServerEvent('qb-vehicleshop:server:sellShowroomVehicle', data.vehicle, dialog.playerid)
+        end
     end
 end)
 
