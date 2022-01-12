@@ -766,7 +766,8 @@ CreateThread(function()
             SetEntityHeading(veh, Config.Shops[k]["ShowroomVehicles"][i].coords.w)
             FreezeEntityPosition(veh,true)
             SetVehicleNumberPlateText(veh, 'BUY ME')
-            createVehZones(k)
         end
+			
+        createVehZones(k)
     end
 end)
