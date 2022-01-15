@@ -235,7 +235,7 @@ RegisterNetEvent('qb-vehicleshop:server:financeVehicle', function(downPayment, p
     local bank = pData.PlayerData.money['bank']
     local vehiclePrice = QBCore.Shared.Vehicles[vehicle]['price']
     local timer = (Config.PaymentInterval * 60)
-    local minDown = tonumber(round(vehiclePrice / Config.MinimumDown))
+    local minDown = tonumber(round((Config.MinimumDown/100) * vehiclePrice))
     if downPayment > vehiclePrice then return TriggerClientEvent('QBCore:Notify', src, 'Vehicle is not worth that much', 'error') end
     if downPayment < minDown then return TriggerClientEvent('QBCore:Notify', src, 'Down payment too small', 'error') end
     if paymentAmount > Config.MaximumPayments then return TriggerClientEvent('QBCore:Notify', src, 'Exceeded maximum payment amount', 'error') end
