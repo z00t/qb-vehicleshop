@@ -86,21 +86,22 @@ Config.Shops = {
             }
         },
     },
-    ['luxury'] = {
+   ['luxury'] = {
         ['Type'] = 'managed',  -- meaning a real player has to sell the car
         ['Zone'] = {
             ['Shape'] = {
-                vector2(-81.724754333496, 72.436462402344),
-                vector2(-60.159938812256, 60.576206207275),
-                vector2(-55.763122558594, 61.749210357666),
-                vector2(-52.965869903564, 69.869110107422),
-                vector2(-50.352680206299, 75.886123657227),
-                vector2(-61.261016845703, 81.564918518066),
-                vector2(-63.812171936035, 75.633102416992),
-                vector2(-76.546226501465, 81.189826965332)
+                vector2(-1260.6973876953, -349.21334838867),
+                vector2(-1268.6248779297, -352.87365722656),
+                vector2(-1274.1533203125, -358.29794311523),
+                vector2(-1273.8425292969, -362.73715209961),
+                vector2(-1270.5701904297, -368.6716003418),
+                vector2(-1266.0561523438, -375.14080810547),
+                vector2(-1244.3684082031, -362.70278930664),
+                vector2(-1249.8704833984, -352.03326416016),
+                vector2(-1252.9503173828, -345.85726928711)
             },
-            ['minZ'] = 69.0,
-            ['maxZ'] = 76.0
+            ['minZ'] = 36.646457672119,
+            ['maxZ'] = 37.516143798828
         },
         ['Job'] = 'cardealer', -- Name of job or none
         ['ShopLabel'] = 'Luxury Vehicle Shop',
@@ -110,30 +111,40 @@ Config.Shops = {
             ['sports'] = 'Sports'
         },
         ['TestDriveTimeLimit'] = 0.5,
-        ['Location'] = vector3(-63.59, 68.25, 73.06),
-        ['ReturnLocation'] = vector3(-65.05, 81.23, 71.16),
-        ['VehicleSpawn'] = vector4(-71.13, 84.04, 71.09, 65.23),
+        ['Location'] = vector3(-1255.6, -361.16, 36.91),
+        ['ReturnLocation'] = vector3(-1231.46, -349.86, 37.33),
+        ['VehicleSpawn'] = vector4(-1231.46, -349.86, 37.33, 26.61),
         ['ShowroomVehicles'] = {
             [1] = {
-                coords = vector4(-75.96, 74.78, 70.90, 221.69),
+                coords = vector4(-1265.31, -354.44, 36.91 - 1.0, 205.08),
                 defaultVehicle = 'italirsx',
                 chosenVehicle = 'italirsx',
             },
             [2] = {
-                coords = vector4(-66.52, 74.33, 70.65, 188.03),
+                coords = vector4(-1270.06, -358.55, 36.91 - 1.0, 247.08),
                 defaultVehicle = 'italigtb',
                 chosenVehicle = 'italigtb',
             },
             [3] = {
-                coords = vector4(-71.83, 68.60, 70.75, 276.57),
+                coords = vector4(-1269.21, -365.03, 36.91 - 1.0, 297.12),
                 defaultVehicle = 'nero',
                 chosenVehicle = 'nero',
             },
             [4] = {
-                coords = vector4(-59.95, 68.61, 70.85, 181.44),
-                defaultVehicle = 'comet2',
-                chosenVehicle = 'comet2',
-            }
+                coords = vector4(-1252.07, -364.2, 36.91, 56.44),
+                defaultVehicle = 'bati',
+                chosenVehicle = 'bati',
+            },
+            [5] = {
+                coords = vector4(-1255.49, -365.91, 36.91, 55.63),
+                defaultVehicle = 'carbonrs',
+                chosenVehicle = 'carbonrs',
+            },
+            [6] = {
+                coords = vector4(-1249.21, -362.97, 36.91, 53.24),
+                defaultVehicle = 'hexer',
+                chosenVehicle = 'hexer',
+            },
         }
     } -- Add your next table under this comma
 }
