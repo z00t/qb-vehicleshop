@@ -529,7 +529,7 @@ RegisterNetEvent('qb-vehicleshop:client:openFinance', function(data)
                 type = 'number',
                 isRequired = true,
                 name = 'paymentAmount',
-                text = 'Total Payments - Min '..Config.MaximumPayments
+                text = 'Total Payments - Max '..Config.MaximumPayments
             }
         }
     })
