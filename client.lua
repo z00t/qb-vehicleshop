@@ -569,17 +569,17 @@ RegisterNetEvent('qb-vehicleshop:client:swapVehicle', function(data)
         if closestVehicle == 0 then return end
         if closestDistance < 5 then QBCore.Functions.DeleteVehicle(closestVehicle) end
         while DoesEntityExist(closestVehicle) do
-            Wait(250)
+            Wait(50)
         end
         Config.Shops[shopName]["ShowroomVehicles"][data.ClosestVehicle].chosenVehicle = data.toVehicle
         local model = GetHashKey(data.toVehicle)
         RequestModel(model)
         while not HasModelLoaded(model) do
-            Citizen.Wait(250)
+            Wait(50)
         end
         local veh = CreateVehicle(model, Config.Shops[shopName]["ShowroomVehicles"][data.ClosestVehicle].coords.x, Config.Shops[shopName]["ShowroomVehicles"][data.ClosestVehicle].coords.y, Config.Shops[shopName]["ShowroomVehicles"][data.ClosestVehicle].coords.z, false, false)
         while not DoesEntityExist(veh) do
-            Citizen.Wait(250)
+            Wait(50)
         end
         SetModelAsNoLongerNeeded(model)        
         SetVehicleOnGroundProperly(veh)
