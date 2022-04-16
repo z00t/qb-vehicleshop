@@ -461,16 +461,25 @@ RegisterNetEvent('qb-vehicleshop:client:vehCategories', function()
             }
         }
     }
+    local a = {}
     for k,v in pairs(Config.Shops[getShopInsideOf()]['Categories']) do
-        categoryMenu[#categoryMenu + 1] = {
-            header = v,
-            params = {
-                event = 'qb-vehicleshop:client:openVehCats',
-                args = {
-                    catName = k
-                }
-            }
-        }
+		table.insert(a, k)
+    end
+    table.sort(a)
+	for i,n in ipairs(a) do
+		for k,v in pairs(Config.Shops[getShopInsideOf()]['Categories']) do
+			if n == k then
+				categoryMenu[#categoryMenu + 1] = {
+					header = v,
+					params = {
+						event = 'qb-vehicleshop:client:openVehCats',
+						args = {
+							catName = k
+						}
+					}
+				}
+			end
+		end
     end
     exports['qb-menu']:openMenu(categoryMenu)
 end)
